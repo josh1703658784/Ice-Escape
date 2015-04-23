@@ -1,0 +1,332 @@
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Maize-Escape</title>
+
+<style>
+            html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+/*                 background-color: green; */
+			#gameOnCanvas {
+                width: inherit;
+                height: inherit;
+                margin: 0;
+                padding: 0;
+                background-color: pink;
+            }
+            h1 {
+                margin: 0;
+                padding: 0;
+            }
+            }
+            </style>
+
+
+</head>
+<body >
+
+
+
+<div id="gameOnCanvas">
+    
+
+
+</div>
+
+<!--SCRIPT IMPORTS - LOTS OF THESE -->
+<script src="Libraries/StackBoxBlur.js"></script>  
+<!--    ^^ faster but not as pretty--  stackBoxBlurCanvasRGB( targetCanvasID, top_x, top_y, width, height, radius, iterations ); -->
+<script src="Libraries/FastBlur.js"></script>
+<!--    ^^ faster but not as pretty--  boxBlurCanvasRGB( targetCanvasID, top_x, top_y, width, height, radius, iterations ); -->  
+<script src="Background.js"></script>
+<script src="Player.js"></script>
+<script src="Obstacle.js"></script>
+<script src="PointsScored.js"></script>
+<script src="Libraries/StackBlur.js"></script>
+<!--    ^^ this one is slow but looks good  stackBlurCanvasRGB( targetCanvasID, top_x, top_y, width, height, radius ); -->
+<script src="Libraries/buzz.js"></script>
+<script src="Menus/Menu.js"></script>
+<script src="Menus/HelpSettingsMenu.js"></script>
+<script src="Menus/PauseMenu.js"></script>
+<script src="Menus/ShareMenu.js"></script>
+<script src="Menus/StartMenu.js"></script>
+<script src="Menus/LostMenu.js"></script>
+<script src="Game.js"></script>
+<script src="ObstaclesArray.js"></script>
+<script src="Button.js"></script>
+<script src="BonusObject.js"></script>
+<script>
+
+    "use strict"
+
+//request animation frame for the specific browser
+var requestAnimationFrame = window.requestAnimationFrame ||
+                            window.mozRequestAnimationFrame ||
+                            window.webkitRequestAnimationFrame ||
+                            window.msRequestAnimationFrame;
+    
+    buzz.defaults.preload = 'auto'; //setup audio APIs
+    buzz.defaults.autoplay = false;
+    buzz.defaults.loop = true;
+    var soundtrack = new buzz.sound("soundtrack.m4a");
+
+    //for the finite state machine for switching screens
+    var START_SCREEN = 0
+    var GAME_SCREEN = 1
+    var LOST_SCREEN = 2
+    var HELP_SETTINGS_SCREEN = 3
+    var PAUSE_SCREEN = 4
+    var SHARE_SCREEN = 5
+
+    //this will hold our objects we use
+    var theStartMenu 
+    var theGame 
+    var theLostMenu
+    var theHelpSettingsMenu
+    var theShareMenu
+    var thePauseMenu
+    var theBackground = new Background()
+
+    //this is sent into the toggle sound button
+    function toggleSound(){
+        console.log("SONG")
+        soundtrack.togglePlay();
+    }
+    
+        
+    initialize(); 
+	function initialize()
+	{
+        checkAudioFormats()
+        checkDisplayScaling()
+        prerenderMenus()        //prerender the menus
+        screenSwitcher()        //go to the finite state machine
+    }
+    
+    function prerenderMenus(){
+        prerenderStartMenu()
+        prerenderCreditsHelpMenu()
+        prerenderShareMenu()
+        prerenderLostMenu()
+        prerenderPauseMenu()
+        prerenderGame()         //prerender the game elements
+    }
+    
+    //prerenders teh start menu
+    function prerenderStartMenu(){
+        var tempButton
+        var buttonsArray = []
+
+        tempButton = new Button("play", GAME_SCREEN)
+        buttonsArray.push(tempButton)
+
+        tempButton = new Button("toggle music", START_SCREEN)
+        tempButton.action = toggleSound
+        buttonsArray.push(tempButton)
+
+        tempButton = new Button("help/credits", HELP_SETTINGS_SCREEN)
+        buttonsArray.push(tempButton)
+        
+        theStartMenu = new StartMenu(buttonsArray)
+    }
+    
+    //prerender the credits menu
+    function prerenderCreditsHelpMenu(){
+        var buttonsArray = []
+        
+        var tempButton = new Button("Avoid the blocks at all costs!", HELP_SETTINGS_SCREEN)
+        tempButton.isInButtonBounds = function(){return false}
+        buttonsArray.push(tempButton)
+        
+        var tempButton = new Button("Use arrow keys to navigate, P to pause, and the edges to wrap-around.", HELP_SETTINGS_SCREEN)
+        tempButton.isInButtonBounds = function(){return false}
+        buttonsArray.push(tempButton)
+
+        var tempButton = new Button("Awesome blur from quasimondo.com and audio APIs from buzz.jaysalvat.com", HELP_SETTINGS_SCREEN)
+        tempButton.isInButtonBounds = function(){return false}
+        buttonsArray.push(tempButton)
+        
+        var tempButton = new Button("Made by Joshua Sarver with pure love, Javascript, and HTML5 Canvas", HELP_SETTINGS_SCREEN)
+        tempButton.isInButtonBounds = function(){return false}
+        buttonsArray.push(tempButton)
+        
+        
+        var tempButton = new Button("back", START_SCREEN)
+        buttonsArray.push(tempButton)
+        
+        theHelpSettingsMenu = new HelpSettingsMenu(buttonsArray)
+    }
+    
+    //prerender the lost menu
+    function prerenderLostMenu(){
+        var tempButton
+        var buttonsArray = []
+
+
+        tempButton = new Button("replay", GAME_SCREEN)
+        buttonsArray.push(tempButton)
+
+        tempButton = new Button("toggle music", LOST_SCREEN)
+        tempButton.action = toggleSound
+        buttonsArray.push(tempButton)
+
+        tempButton = new Button("share", SHARE_SCREEN)
+        buttonsArray.push(tempButton)
+
+        tempButton = new Button("help/credits", HELP_SETTINGS_SCREEN)
+        buttonsArray.push(tempButton)
+        
+        theLostMenu = new LostMenu(buttonsArray)
+    }
+    
+    //prerender the share menu
+    function prerenderShareMenu(){
+        var tempButton = new Button("Facebook", SHARE_SCREEN)
+        var buttonsArray = []
+        buttonsArray.push(tempButton)
+
+        tempButton = new Button("Twitter", SHARE_SCREEN)
+        buttonsArray.push(tempButton)
+
+        tempButton = new Button("back", LOST_SCREEN)
+        buttonsArray.push(tempButton)
+        
+        theShareMenu = new ShareMenu(buttonsArray)
+    }
+    
+    //prerender the pause menu
+    function prerenderPauseMenu(){
+        var tempButton = new Button("continue", GAME_SCREEN)
+        var buttonsArray = []
+        buttonsArray.push(tempButton)
+        
+        thePauseMenu = new PauseMenu(buttonsArray)
+    }
+    
+    //prerender the game
+    function prerenderGame(){
+        theGame = new Game(LOST_SCREEN, theBackground)
+    }
+    
+    //THIS WILL BE IMPLEMENTED AT LATER DEVELOPMENT for high DPI screens
+    function checkDisplayScaling(context) {
+        if ('devicePixelRatio' in window) {
+            if (window.devicePixelRatio > 1) {
+                return window.devicePixelRatio;
+            }
+        }
+        return 1;
+    }
+    
+    //what audio format does your browser support
+    function checkAudioFormats(){
+             if (!buzz.isAACSupported()) {
+            alert("Your browser doesn't support AAC Format.");
+        }
+    }
+    
+    
+    //the beautiful finite state machine
+    //this determine what screen we are currently on
+    //and where to go to next
+    function screenSwitcher(){        
+        var screenChooser = START_SCREEN;
+        
+        var inStartMenu = false
+        var inGame = false
+        var inHelpSettingsMenu = false
+        var inShareMenu = false
+        var inLostMenu = false
+        var inPauseMenu = false
+        
+        var isMusic = true
+
+        var points = -1 
+        var tempCanvas
+        setInterval(
+            function(){
+                switch(screenChooser){
+                        case START_SCREEN:
+                            if(!inStartMenu){   //if we aren't here already show this menu
+                                theStartMenu.nextScreen = START_SCREEN
+                                theStartMenu.fadeIn()
+                                theBackground.blur(180) //blur the background
+                                inStartMenu = true
+                            }
+                            else if(theStartMenu.nextScreen != screenChooser){  //if we need to go to a new screen
+                                theStartMenu.fadeOut()
+                                screenChooser = theStartMenu.nextScreen
+                                inStartMenu = false
+                            }
+                            break;
+                        case GAME_SCREEN:
+                            if(!inGame){
+                                theGame.nextScreen = GAME_SCREEN
+                                theGame.startGame()
+                                theBackground.blur(0)
+                                inGame = true     
+                            }
+                            else if(theGame.nextScreen != screenChooser){
+                                tempCanvas = theGame.returnMergedCanvas()
+                                points = theGame.thePointCounter.points
+                                screenChooser = LOST_SCREEN
+                                inGame = false
+                                theGame.fadeOut()
+                            }
+                            break;
+                        case LOST_SCREEN:
+                            if(!inLostMenu){
+                                theBackground.blur(180)
+                                theLostMenu.fadeIn()
+                                inLostMenu = true
+                                theLostMenu.nextScreen = screenChooser
+                            }
+                            else if(theLostMenu.nextScreen != screenChooser){
+                                theLostMenu.fadeOut()
+                                screenChooser = theLostMenu.nextScreen;
+                                inLostMenu = false
+                            }
+                            break;
+                        case HELP_SETTINGS_SCREEN:
+                            if(!inHelpSettingsMenu){
+                                theHelpSettingsMenu.fadeIn()
+                                theHelpSettingsMenu.nextScreen = screenChooser
+                                inHelpSettingsMenu = true
+                            }
+                            else if(theHelpSettingsMenu.nextScreen != screenChooser){
+                                theHelpSettingsMenu.fadeOut()
+                                screenChooser = theHelpSettingsMenu.nextScreen
+                                inHelpSettingsMenu = false
+                            }
+                            break;
+                        case PAUSE_SCREEN:
+                            break;
+                    case SHARE_SCREEN:
+                        if(!inShareMenu){
+                            theShareMenu.fadeIn()
+                            inShareMenu = true
+                            theShareMenu.nextScreen = screenChooser
+                        }
+                        else if(theShareMenu.nextScreen != screenChooser){
+                            theShareMenu.fadeOut()
+                            screenChooser = theShareMenu.nextScreen
+                            inShareMenu = false
+                        }
+                        break;
+                }
+            }, 50
+        );
+
+    }
+
+
+</script>
+
+
+</body>
+</html>  
