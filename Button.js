@@ -1,3 +1,4 @@
+"use strict"
 function Button(text, nextScreen){
     this.text = text
     this.width

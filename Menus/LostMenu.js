@@ -1,9 +1,10 @@
+"use strict"
 LostMenu.prototype = Menu.prototype
 LostMenu.prototype.constructor = LostMenu
 
 
 function LostMenu(buttonsArray) {
-    var TITLE_TEXT = "You died"
+    var TITLE_TEXT = "You sunk!"
     var MENU_NAME = "lostMenu"
 
     Menu.call(this, TITLE_TEXT, MENU_NAME, buttonsArray)

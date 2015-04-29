@@ -1,3 +1,4 @@
+"use strict"
 function Menu(TITLE_TEXT, MENU_NAME, buttons) {
     this.FONT_COLOR = "white"
     this.FONT_TYPE = "30px Arial"

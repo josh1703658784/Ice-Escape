@@ -1,3 +1,4 @@
+"use strict"
 ShareMenu.prototype = Menu.prototype
 ShareMenu.prototype.constructor = ShareMenu
 

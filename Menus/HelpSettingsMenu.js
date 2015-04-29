@@ -1,3 +1,4 @@
+"use strict"
 HelpSettingsMenu.prototype = Menu.prototype
 HelpSettingsMenu.prototype.constructor = HelpSettingsMenu
 

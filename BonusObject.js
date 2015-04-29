@@ -1,3 +1,6 @@
+//NOT YET IMPLEMENTED -- WILL IN LATER DEVELOPMENT
+
+
 function BonusObject(){
     this.currentObstacleSpeed = 5;
     this.canvasElement = document.createElement('canvas')
@@ -68,7 +71,6 @@ BonusObject.prototype.getContext = function(){
 
 
 BonusObject.prototype.update = function(){
-//    console.log("UPDATIN DAT SHIIIIT")
     this.clear()
     this.yPosition = (this.yPosition + 1)
 //console.log(this.yPosition)

@@ -1,3 +1,4 @@
+"use strict"
 PauseMenu.prototype = Menu.prototype
 PauseMenu.prototype.constructor = PauseMenu
 

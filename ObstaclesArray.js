@@ -1,3 +1,4 @@
+"use strict"
 ObstaclesArray.prototype = Array.prototype;             //inherits from the default JS array object/class
 ObstaclesArray.prototype.constructor = ObstaclesArray
 

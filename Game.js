@@ -1,3 +1,4 @@
+"use strict"
 //This object controls the game
 
 //Game construcor

@@ -1,11 +1,12 @@
+"use strict"
 //the background for the game is passed around throughout the different stages
 //it's a little messy but saves on memory and C/GPU cycles
 //prerendering blur isn't fully implemented yet - blur does work but trying to optimize it
 function Background(){
     this.leftBound = window.innerWidth / 30;                           
     this.rightBound = window.innerWidth - window.innerWidth / 30;     
-    this.BACKGROUND_COLOR = "#663300"   
-    this.BOUNDS_COLOR = "#009933"
+    this.BACKGROUND_COLOR = "#0282a5"   
+    this.BOUNDS_COLOR = "#f5f5f5"
     this.currentBlur = 0                                        //no blur currently
     this.blurAmount = 180                                       //what we blur to on request (max blur)
     this.canvasElement = document.createElement('canvas')       //create a new canvas

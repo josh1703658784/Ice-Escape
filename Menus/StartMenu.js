@@ -1,9 +1,10 @@
+"use strict"
 StartMenu.prototype = Menu.prototype
 StartMenu.prototype.constructor = StartMenu
 
 
 function StartMenu(buttonsArray) {
-    var TITLE_TEXT = "Maize-Escape"
+    var TITLE_TEXT = "Ice Escape"
     var MENU_NAME = "startMenu"
 
     this.nextScreen = -1

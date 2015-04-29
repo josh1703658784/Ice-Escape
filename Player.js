@@ -2,17 +2,21 @@
 function Player(){
     this.speed = 5
     this.size = 10;                                         //user size -- maybe scale this 
-    this.userObjectXCoordinate = window.innerWidth/2;         
-	this.userObjectYCoordinate = window.innerHeight*0.8;      
+    this.userObjectXCoordinate = Math.floor(window.innerWidth/2)        
+	this.userObjectYCoordinate = Math.floor(window.innerHeight*0.8)      
     this.leftBound = 0;                                     //initially set bounds to window bounds
     this.rightBound = window.innerWidth;                    //initially set bounds to window bounds
-    this.PLAYER_COLOR = '#8ED6FF'
+//    this.PLAYER_COLOR = '#f5f5f5'             //grey
+    this.PLAYER_COLOR = '#48325b'
     this.prerenderCanvas = document.createElement('canvas')
     this.canvasElement = document.createElement('canvas')
     this.topBound = 0
     this.bottomBound = window.innerHeight
     this.keysDown = {};
     this.opacity = 0
+
+    this.totalWidth = 16
+    this.totalHeight = 34
     
     var that = this
     
@@ -113,33 +117,59 @@ Player.prototype.setSpeed = function(passedSpeed){
 
 //prerender the player to an offscreen canvas
 Player.prototype.prerender = function(){
-    this.prerenderCanvas.width = this.size*2
-    this.prerenderCanvas.height = this.size
-    var prerenderContext = this.prerenderCanvas.getContext('2d')
+    this.prerenderCanvas.width = this.totalWidth
+    this.prerenderCanvas.height = this.totalHeight
+//    this.prerenderCanvas.width = this.size*2
+//    this.prerenderCanvas.height = this.size
+    var ctx = this.prerenderCanvas.getContext('2d')
 
-
-    var topPointX = this.size;
-    var topPointY = 0;
-    
-    var leftPointX = topPointX - this.size;
-    var leftPointY = topPointY + this.size;
+        var radius = 8
+        var width = 16
+        var xPos = 0
+        var yPos = 0 + radius
+        var xPosArc = xPos + radius
+        var cargoRadius = Math.floor(radius /4)
         
-    var rightPointX = topPointX + this.size;
-    var rightPointY = topPointY + this.size;
-    
-    var mainContext = this.getContext();
-    prerenderContext.beginPath();
-    {
-        prerenderContext.moveTo(topPointX, topPointY);
-        prerenderContext.lineTo(leftPointX, leftPointY);
-        prerenderContext.lineTo(rightPointX, rightPointY);
-        prerenderContext.lineTo(topPointX, topPointY);
-    }
-    prerenderContext.closePath();
 
-    prerenderContext.fillStyle = this.PLAYER_COLOR;
-    prerenderContext.fill();
-    prerenderContext.stroke();
+        //the main ship square
+        ctx.beginPath()
+        {
+            ctx.fillStyle = "black"
+            ctx.fillRect(xPos,yPos,width, 25);
+        }
+        ctx.closePath()
+
+        //the arc on the front of the ship
+        ctx.beginPath()
+        {
+            ctx.fillStyle = "black"
+            ctx.arc(xPosArc, yPos, radius, 0, Math.PI, true)
+            ctx.fill()
+        }
+        ctx.closePath()
+        
+        //cargo in/on ship
+        for(var i = 0; i < 3; i++){
+            var cargoY = (yPos + radius/2) + (2.1*cargoRadius * i)
+            for(var j = 0; j < 3; j++){
+                var cargoX = (xPos + cargoRadius + 2) + (2.1*cargoRadius * j)
+                ctx.beginPath()
+                {
+                    ctx.fillStyle = "#588894"
+                    ctx.arc(cargoX,cargoY,cargoRadius,0,2*Math.PI)
+                    ctx.fill()  
+                }
+                ctx.closePath()
+            }
+        }
+        
+        //control captain area thing in/on ship
+        ctx.beginPath()
+        {
+            ctx.fillStyle = "#cecece"
+            ctx.fillRect(xPos+2,yPos+19,width-4,5);
+        }
+        ctx.closePath()
 };
 
 //draw the player from the prerender

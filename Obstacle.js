@@ -1,4 +1,4 @@
-
+"use strict"
 function Obstacle(){
     this.MAX_WIDTH_PERCENT = 0.2
     this.MAX_HEIGHT_PERCENT = 0.4
@@ -11,7 +11,8 @@ function Obstacle(){
     this.isOffScreen = false;           //is the obstacle off screen
     this.isSafeToAddMore = false;       //is the obstacle far enough down screen we can add more to the array this is in
     
-    this.FILL_COLOR = '#009933'
+//    this.FILL_COLOR = '#48325b'       purple
+    this.FILL_COLOR = '#f5f5f5'
 
     this.speed = 0;
     

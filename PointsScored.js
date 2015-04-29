@@ -1,3 +1,4 @@
+"use strict"
 function PointsScored(){
     this.points = 0;
     var startTime;
