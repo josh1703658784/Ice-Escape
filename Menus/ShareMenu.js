@@ -24,10 +24,19 @@ ShareMenu.prototype = Menu.prototype
 ShareMenu.prototype.constructor = ShareMenu
 
 
-function ShareMenu(buttonsArray){
+function ShareMenu(){
     var TITLE_TEXT = "Share"
     var MENU_NAME = "shareMenu"
 
+    var tempButton = new Button("Facebook", SHARE_SCREEN)
+    var buttonsArray = []
+    buttonsArray.push(tempButton)
+
+    tempButton = new Button("Twitter", SHARE_SCREEN)
+    buttonsArray.push(tempButton)
+
+    tempButton = new Button("back", LOST_SCREEN)
+    buttonsArray.push(tempButton)
     
     Menu.call(this, TITLE_TEXT, MENU_NAME, buttonsArray)
 

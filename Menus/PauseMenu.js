@@ -22,10 +22,14 @@ PauseMenu.prototype = Menu.prototype
 PauseMenu.prototype.constructor = PauseMenu
 
 
-function PauseMenu(buttonsArray){
+function PauseMenu(){
 //    this.theGame = theGame
     var TITLE_TEXT = "Paused"
     var MENU_NAME = "pauseMenu"
+
+    var tempButton = new Button("continue", GAME_SCREEN)
+    var buttonsArray = []
+    buttonsArray.push(tempButton)
 
     Menu.call(this, TITLE_TEXT, MENU_NAME, buttonsArray)
 };

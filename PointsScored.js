@@ -35,17 +35,17 @@ function PointsScored(){
     this.oldTextX = 0.0;
     this.oldTextY = 0.0;
     
-    this.rightBound = window.innerWidth - 10;
+    this.rightBound = StaticSettings.pointsRightBound
     
-    this.FONT_HEIGHT = 30
-    this.FONT_TYPE = this.FONT_HEIGHT + "px Verdana"
-    this.FONT_COLOR = "white"
+    this.FONT_HEIGHT = StaticSettings.pointsFontHeight
+    this.FONT_TYPE = StaticSettings.pointsFontType
+    this.FONT_COLOR = StaticSettings.pointsFontColor
 
-    this.Y_POSITION = 40
-    this.TEXT_ALIGN = "right"
+    this.Y_POSITION = StaticSettings.pointsYPosition
+    this.TEXT_ALIGN = StaticSettings.pointsTextAlign
     
     this.levelStartTime = this.getSecondsSinceUnixEpoch();
-    this.SECONDS_PER_LEVEL = 10;
+    this.SECONDS_PER_LEVEL = StaticSettings.pointsSecondsPerLevel
     this.opacity = 0
 
     this.canvasElement = document.createElement('canvas')           //dynamically creates a canvas element

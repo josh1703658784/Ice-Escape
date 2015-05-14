@@ -23,11 +23,24 @@ StartMenu.prototype = Menu.prototype
 StartMenu.prototype.constructor = StartMenu
 
 
-function StartMenu(buttonsArray) {
+function StartMenu() {
     var TITLE_TEXT = "Ice Escape"
     var MENU_NAME = "startMenu"
 
     this.nextScreen = -1
+
+    var tempButton
+    var buttonsArray = []
+
+    tempButton = new Button("play", GAME_SCREEN)
+    buttonsArray.push(tempButton)
+
+    tempButton = new Button("toggle music", START_SCREEN)
+    tempButton.action = toggleSound
+    buttonsArray.push(tempButton)
+
+    tempButton = new Button("help/credits", HELP_SETTINGS_SCREEN)
+    buttonsArray.push(tempButton)
 
     
     Menu.call(this, TITLE_TEXT, MENU_NAME, buttonsArray)

@@ -23,14 +23,19 @@
 //it's a little messy but saves on memory and C/GPU cycles
 //prerendering blur isn't fully implemented yet - blur does work but trying to optimize it
 function Background(){
-    this.leftBound = window.innerWidth / 30;                           
-    this.rightBound = window.innerWidth - window.innerWidth / 30;     
-    this.BACKGROUND_COLOR = "#0282a5"   
-    this.BOUNDS_COLOR = "#f5f5f5"
+    this.leftBound = StaticSettings.leftBound
+    this.rightBound = StaticSettings.rightBound
+    this.BOUNDS_COLOR = StaticSettings.backgroundBoundsColor
+    this.BACKGROUND_COLOR = StaticSettings.backgroundColor
+
+    // this.leftBound = window.innerWidth / 30                        
+    // this.rightBound = window.innerWidth - window.innerWidth / 30;     
+    // this.BACKGROUND_COLOR = "#0282a5"   
+    // this.BOUNDS_COLOR = "#f5f5f5"
     this.currentBlur = 0                                        //no blur currently
     this.blurAmount = 180                                       //what we blur to on request (max blur)
     this.canvasElement = document.createElement('canvas')       //create a new canvas
-    this.zIndex = "1"                                           //zindex forces this to the bottom always
+    this.zIndex = StaticSettings.backgroundShowZIndex                                          //zindex forces this to the bottom always
     this.prerenderCanvas = document.createElement('canvas') 
     this.prerenderBlurredCanvas = document.createElement('canvas')
     this.opacity = 0                                            //fully transparent at first

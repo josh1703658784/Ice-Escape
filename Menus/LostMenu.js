@@ -23,9 +23,26 @@ LostMenu.prototype = Menu.prototype
 LostMenu.prototype.constructor = LostMenu
 
 
-function LostMenu(buttonsArray) {
+function LostMenu() {
     var TITLE_TEXT = "You sunk!"
     var MENU_NAME = "lostMenu"
+
+    var tempButton
+    var buttonsArray = []
+
+    tempButton = new Button("replay", GAME_SCREEN)
+    buttonsArray.push(tempButton)
+
+    tempButton = new Button("toggle music", LOST_SCREEN)
+    tempButton.action = toggleSound
+    buttonsArray.push(tempButton)
+
+//        tempButton = new Button("share", SHARE_SCREEN)
+//        buttonsArray.push(tempButton)
+
+    tempButton = new Button("help/credits", HELP_SETTINGS_SCREEN)
+    buttonsArray.push(tempButton)
+        
 
     Menu.call(this, TITLE_TEXT, MENU_NAME, buttonsArray)
 

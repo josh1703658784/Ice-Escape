@@ -29,14 +29,15 @@
                 height: 100%;
                 margin: 0;
                 padding: 0;
+            }
 /*                 background-color: green; */
-			#gameOnCanvas {
+/*			#gameOnCanvas {
                 width: inherit;
                 height: inherit;
                 margin: 0;
                 padding: 0;
                 background-color: pink;
-            }
+            }*/
             h1 {
                 margin: 0;
                 padding: 0;
@@ -78,6 +79,7 @@
 <script src="ObstaclesArray.js"></script>
 <script src="Button.js"></script>
 <script src="BonusObject.js"></script>
+<script src="StaticSettings.js"></script>
 <script>
 
     "use strict"
@@ -92,7 +94,7 @@ var requestAnimationFrame = window.requestAnimationFrame ||
     buzz.defaults.autoplay = false;
     buzz.defaults.loop = true;
     var soundtrack = new buzz.sound("soundtrack.m4a");
-
+// alert(StaticSettings.leftBound)
     //for the finite state machine for switching screens
     var START_SCREEN = 0
     var GAME_SCREEN = 1
@@ -137,93 +139,27 @@ var requestAnimationFrame = window.requestAnimationFrame ||
     
     //prerenders teh start menu
     function prerenderStartMenu(){
-        var tempButton
-        var buttonsArray = []
-
-        tempButton = new Button("play", GAME_SCREEN)
-        buttonsArray.push(tempButton)
-
-        tempButton = new Button("toggle music", START_SCREEN)
-        tempButton.action = toggleSound
-        buttonsArray.push(tempButton)
-
-        tempButton = new Button("help/credits", HELP_SETTINGS_SCREEN)
-        buttonsArray.push(tempButton)
-        
-        theStartMenu = new StartMenu(buttonsArray)
+        theStartMenu = new StartMenu()
     }
     
     //prerender the credits menu
     function prerenderCreditsHelpMenu(){
-        var buttonsArray = []
-        
-        var tempButton = new Button("Avoid the ice-bergs at all costs!", HELP_SETTINGS_SCREEN)
-        tempButton.isInButtonBounds = function(){return false}
-        buttonsArray.push(tempButton)
-        
-        var tempButton = new Button("arrow keys navigate / p pauses / edges wrap-around.", HELP_SETTINGS_SCREEN)
-        tempButton.isInButtonBounds = function(){return false}
-        buttonsArray.push(tempButton)
-
-        var tempButton = new Button("awesome blur from quasimondo.com / audio APIs from buzz.jaysalvat.com", HELP_SETTINGS_SCREEN)
-        tempButton.isInButtonBounds = function(){return false}
-        buttonsArray.push(tempButton)
-        
-        var tempButton = new Button("made by Joshua Sarver with pure love, Javascript, and HTML5 Canvas", HELP_SETTINGS_SCREEN)
-        tempButton.isInButtonBounds = function(){return false}
-        buttonsArray.push(tempButton)
-        
-        
-        var tempButton = new Button("back", START_SCREEN)
-        buttonsArray.push(tempButton)
-        
-        theHelpSettingsMenu = new HelpSettingsMenu(buttonsArray)
+        theHelpSettingsMenu = new HelpSettingsMenu()
     }
     
     //prerender the lost menu
     function prerenderLostMenu(){
-        var tempButton
-        var buttonsArray = []
-
-
-        tempButton = new Button("replay", GAME_SCREEN)
-        buttonsArray.push(tempButton)
-
-        tempButton = new Button("toggle music", LOST_SCREEN)
-        tempButton.action = toggleSound
-        buttonsArray.push(tempButton)
-
-//        tempButton = new Button("share", SHARE_SCREEN)
-//        buttonsArray.push(tempButton)
-
-        tempButton = new Button("help/credits", HELP_SETTINGS_SCREEN)
-        buttonsArray.push(tempButton)
-        
-        theLostMenu = new LostMenu(buttonsArray)
+        theLostMenu = new LostMenu()
     }
     
     //prerender the share menu
     function prerenderShareMenu(){
-        var tempButton = new Button("Facebook", SHARE_SCREEN)
-        var buttonsArray = []
-        buttonsArray.push(tempButton)
-
-        tempButton = new Button("Twitter", SHARE_SCREEN)
-        buttonsArray.push(tempButton)
-
-        tempButton = new Button("back", LOST_SCREEN)
-        buttonsArray.push(tempButton)
-        
-        theShareMenu = new ShareMenu(buttonsArray)
+        theShareMenu = new ShareMenu()
     }
     
     //prerender the pause menu
     function prerenderPauseMenu(){
-        var tempButton = new Button("continue", GAME_SCREEN)
-        var buttonsArray = []
-        buttonsArray.push(tempButton)
-        
-        thePauseMenu = new PauseMenu(buttonsArray)
+        thePauseMenu = new PauseMenu()
     }
     
     //prerender the game

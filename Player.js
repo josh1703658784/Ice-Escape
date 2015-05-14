@@ -17,10 +17,8 @@
 
 
 
-
-
-
 "use strict"
+
 function Player(){
     this.speed = 5
     this.size = 10;                                         //user size -- maybe scale this 
