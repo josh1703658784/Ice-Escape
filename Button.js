@@ -27,11 +27,11 @@ function Button(text, nextScreen){
     this.textYPosition
     this.prerenderCanvas
     this.canvasElement
-    this.buttonTransparency = 0.2
-    this.textTransparency = 0.3
-    this.fontColor = "white"
-    this.fontType = "30px Arial"
-    this.fillColor = "white"
+    this.buttonTransparency = StaticSettings.buttonTransparency
+    this.textTransparency = StaticSettings.buttonTextTransparency
+    this.fontColor = StaticSettings.buttonFontColor
+    this.fontType = StaticSettings.buttonFontType
+    this.fillColor = StaticSettings.buttonFillColor
     this.actionMethod
     this.nextScreen = nextScreen
     this.isMouseOver = false

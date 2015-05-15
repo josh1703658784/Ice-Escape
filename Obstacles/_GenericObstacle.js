@@ -1,0 +1,3 @@
+function GenericObstacle(){
+	this.isHarmful
+}

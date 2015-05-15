@@ -58,28 +58,39 @@
 </div>
 
 <!--SCRIPT IMPORTS - LOTS OF THESE -->
-<script src="Libraries/StackBoxBlur.js"></script>  
-<!--    ^^ faster but not as pretty--  stackBoxBlurCanvasRGB( targetCanvasID, top_x, top_y, width, height, radius, iterations ); -->
-<script src="Libraries/FastBlur.js"></script>
-<!--    ^^ faster but not as pretty--  boxBlurCanvasRGB( targetCanvasID, top_x, top_y, width, height, radius, iterations ); -->  
+<script src="Libraries/StackBoxBlur.js"></script>   <!--    ^^ faster but not as pretty--  stackBoxBlurCanvasRGB( targetCanvasID, top_x, top_y, width, height, radius, iterations ); -->
+<script src="Libraries/FastBlur.js"></script>       <!--    ^^ faster but not as pretty--  boxBlurCanvasRGB( targetCanvasID, top_x, top_y, width, height, radius, iterations ); -->  
+<script src="Libraries/StackBlur.js"></script>      <!--    ^^ this one is slow but looks good  stackBlurCanvasRGB(targetCanvasID, top_x, top_y, width, height, radius ); -->
+
+<script src="Libraries/buzz.js"></script>
+
+<script src="StaticSettings.js"></script>
+
+<!-- <script src="GameObject.js"></script> -->
+
+<script src="Game.js"></script>
 <script src="Background.js"></script>
 <script src="Player.js"></script>
-<script src="Obstacle.js"></script>
 <script src="PointsScored.js"></script>
-<script src="Libraries/StackBlur.js"></script>
-<!--    ^^ this one is slow but looks good  stackBlurCanvasRGB( targetCanvasID, top_x, top_y, width, height, radius ); -->
-<script src="Libraries/buzz.js"></script>
-<script src="Menus/Menu.js"></script>
+<script src="Button.js"></script>
+
+<script src="Menus/_Menu.js"></script>
 <script src="Menus/HelpSettingsMenu.js"></script>
 <script src="Menus/PauseMenu.js"></script>
 <script src="Menus/ShareMenu.js"></script>
 <script src="Menus/StartMenu.js"></script>
 <script src="Menus/LostMenu.js"></script>
-<script src="Game.js"></script>
-<script src="ObstaclesArray.js"></script>
-<script src="Button.js"></script>
-<script src="BonusObject.js"></script>
-<script src="StaticSettings.js"></script>
+
+<script src="Obstacles/ObstaclesArray.js"></script>
+<script src="Obstacles/BonusObstacle.js"></script>
+<script src="Obstacles/Obstacle.js"></script>
+<script src="Obstacles/DeductObstacle.js"></script>
+<script src="Obstacles/_GenericObstacle.js"></script>
+
+
+
+
+
 <script>
 
     "use strict"

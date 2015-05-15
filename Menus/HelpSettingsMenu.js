@@ -23,7 +23,6 @@
 HelpSettingsMenu.prototype = Menu.prototype
 HelpSettingsMenu.prototype.constructor = HelpSettingsMenu
 
-
 function HelpSettingsMenu(){
     var TITLE_TEXT = "Help/Settings/Credits"
     var ACTION_TEXT = "play"
@@ -31,35 +30,28 @@ function HelpSettingsMenu(){
     this.nextScreen = -1
 
 
-       	var buttonsArray = []
-        
-        var tempButton = new Button("Avoid the ice-bergs at all costs!", HELP_SETTINGS_SCREEN)
-        tempButton.isInButtonBounds = function(){return false}
-        buttonsArray.push(tempButton)
-        
-        var tempButton = new Button("arrow keys navigate / p pauses / edges wrap-around.", HELP_SETTINGS_SCREEN)
-        tempButton.isInButtonBounds = function(){return false}
-        buttonsArray.push(tempButton)
+   	var buttonsArray = []
+    
+    var tempButton = new Button("Avoid the ice-bergs at all costs!", HELP_SETTINGS_SCREEN)
+    tempButton.isInButtonBounds = function(){return false}
+    buttonsArray.push(tempButton)
+    
+    var tempButton = new Button("arrow keys navigate / p pauses / edges wrap-around.", HELP_SETTINGS_SCREEN)
+    tempButton.isInButtonBounds = function(){return false}
+    buttonsArray.push(tempButton)
 
-        var tempButton = new Button("awesome blur from quasimondo.com / audio APIs from buzz.jaysalvat.com", HELP_SETTINGS_SCREEN)
-        tempButton.isInButtonBounds = function(){return false}
-        buttonsArray.push(tempButton)
-        
-        var tempButton = new Button("made by Joshua Sarver with pure love, Javascript, and HTML5 Canvas", HELP_SETTINGS_SCREEN)
-        tempButton.isInButtonBounds = function(){return false}
-        buttonsArray.push(tempButton)
-        
-        
-        var tempButton = new Button("back", START_SCREEN)
-        buttonsArray.push(tempButton)
-        
+    var tempButton = new Button("awesome blur from quasimondo.com / audio APIs from buzz.jaysalvat.com", HELP_SETTINGS_SCREEN)
+    tempButton.isInButtonBounds = function(){return false}
+    buttonsArray.push(tempButton)
+    
+    var tempButton = new Button("made by Joshua Sarver with pure love, Javascript, and HTML5 Canvas", HELP_SETTINGS_SCREEN)
+    tempButton.isInButtonBounds = function(){return false}
+    buttonsArray.push(tempButton)
     
     
- 
-
+    var tempButton = new Button("back", START_SCREEN)
+    buttonsArray.push(tempButton)
+        
+    
     Menu.call(this, TITLE_TEXT, MENU_NAME, buttonsArray)
-    
-
-
-
 };

@@ -16,9 +16,9 @@ function StaticSettings(){
     StaticSettings.SHARE_SCREEN = 5
 
 	//GAME
-
 	StaticSettings.gameIncrementObstacleSpeedAmount = 2
 	StaticSettings.gameIncrementCounterSpeedAmount = 2
+	// StaticSettings.bonusObjectChance = 1/5
 
 	//BACKGROUND
 	StaticSettings.backgroundBoundsColor = "#f5f5f5"
@@ -32,10 +32,10 @@ function StaticSettings(){
 	StaticSettings.obstacleHideZIndex = "-3"
 	StaticSettings.obstacleMaxWidthMultipler = 0.2
 	StaticSettings.obstacleMaxHeightMultipler = 0.4
-	StaticSettings.getObstacleWidth = function(){
+	StaticSettings.getRandomObstacleWidth = function(){
 		return Math.floor((Math.random() * window.innerWidth * StaticSettings.obstacleMaxWidthMultipler) + 1)
 	}
-	StaticSettings.getObstacleHeight = function(){
+	StaticSettings.getRandomObstacleHeight = function(){
 		return Math.floor((Math.random() * window.innerHeight * StaticSettings.obstacleMaxHeightMultipler) + 1)
 	}
 
@@ -78,4 +78,4 @@ function StaticSettings(){
 	StaticSettings.pointsTextAlign = "right"
 	StaticSettings.pointsShowZIndex = "3"
 	StaticSettings.pointsHideZIndex = "-3"
-		StaticSettings.pointsSecondsPerLevel = 10
+	StaticSettings.pointsSecondsPerLevel = 10

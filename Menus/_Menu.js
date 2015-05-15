@@ -21,14 +21,14 @@
 
 "use strict"
 function Menu(TITLE_TEXT, MENU_NAME, buttons) {
-    this.FONT_COLOR = "white"
-    this.FONT_TYPE = "30px Arial"
+    this.FONT_COLOR = StaticSettings.menuFontColor
+    this.FONT_TYPE = StaticSettings.menuFontType
     this.TITLE = TITLE_TEXT
 
-    this.FONT_TRANSPARENCY = 0.2
-    this.BUTTON_TRANSPARENCY = 0.2
+    this.FONT_TRANSPARENCY = StaticSettings.menuFontTransparency
+    this.BUTTON_TRANSPARENCY = StaticSettings.buttonTransparency
 
-    this.MENU_TITLE_ALIGNMENT = "center"
+    this.MENU_TITLE_ALIGNMENT = StaticSettings.menuTitleAlignment
     this.BLUR_AMOUNT = 180
 //    this.background = theBackground
     this.nextScreen
@@ -50,6 +50,7 @@ function Menu(TITLE_TEXT, MENU_NAME, buttons) {
     this.prerender()
 
 }
+
 
 Menu.prototype.toggleEventListeners = function(aBool){
     if(aBool){

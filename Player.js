@@ -18,20 +18,23 @@
 
 
 "use strict"
+// Player.prototype = GameObject.prototype
+// Player.prototype.constructor = Player
 
 function Player(){
-    this.speed = 5
+    // new GameObject()
+    this.speed = StaticSettings.playerSpeed
     this.size = 10;                                         //user size -- maybe scale this 
-    this.userObjectXCoordinate = Math.floor(window.innerWidth/2)        
-	this.userObjectYCoordinate = Math.floor(window.innerHeight*0.8)      
-    this.leftBound = 0;                                     //initially set bounds to window bounds
-    this.rightBound = window.innerWidth;                    //initially set bounds to window bounds
+    this.userObjectXCoordinate = StaticSettings.playerStartX   
+	this.userObjectYCoordinate = StaticSettings.playerStartY     
+    this.leftBound = StaticSettings.leftBound;                                     //initially set bounds to window bounds
+    this.rightBound = StaticSettings.rightBound                    //initially set bounds to window bounds
 //    this.PLAYER_COLOR = '#f5f5f5'             //grey
     this.PLAYER_COLOR = '#48325b'
     this.prerenderCanvas = document.createElement('canvas')
     this.canvasElement = document.createElement('canvas')
-    this.topBound = 0
-    this.bottomBound = window.innerHeight
+    this.topBound = StaticSettings.topBound
+    this.bottomBound = StaticSettings.bottomBound
     this.keysDown = {};
     this.opacity = 0
 

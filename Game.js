@@ -44,6 +44,7 @@ function Game(LOST_SCREEN, background) {
     
     this.inPauseMenu = false
     this.pausedCanvas
+    this.theBonusObject
     
 }
 
@@ -183,6 +184,15 @@ Game.prototype.fadeIn = function(){
     this.thePointCounter.fadeIn()
 }
 
+Game.prototype.isGenerateBonusObject = function(){
+    var theNumber = Math.floor((Math.random() * 1000) + 1)
+    if(theNumber == 500){
+        console.log("MAKING BONUS OBJECT")
+        return true
+    }
+    return false
+}
+
 //actually animates the game
 Game.prototype.animate = function () {
     //RAF returns an object to cancel the animation -- we need to use Function.prototype.bind to work inside an object method
@@ -196,9 +206,12 @@ Game.prototype.animate = function () {
     }
     
     //THIS IS IN DEVELOPMENT YET
-//    if(this.theBonusObject.isCollisionBonus(this.thePlayer)){
-//        
-//    }
+    if(this.isGenerateBonusObject()){
+        this.obstaclesArray.push(new BonusObject())
+    }
+   if(this.theBonusObject != null){
+        this.theBonusObject.update()
+   }
     
     
     
@@ -206,8 +219,8 @@ Game.prototype.animate = function () {
     this.obstaclesArray.animateObstacles(this.thePlayer)    //obstacles target the player every so often so we pass it in for coordinates
     
     if(this.thePointCounter.isLevelUp()){                   //can probably move this out of RAF at some point<<<<<<<<<<<<<<<<<<<<<<<<
-        this.obstaclesArray.incrementSpeed(2)               //increment speed of game
-        this.thePointCounter.incrementCounterSpeed(2)       //increment how fast the player accumulates points
+        this.obstaclesArray.incrementSpeed(StaticSettings.gameIncrementObstacleSpeedAmount)               //increment speed of game
+        this.thePointCounter.incrementCounterSpeed(StaticSettings.gameIncrementCounterSpeedAmount)       //increment how fast the player accumulates points
         this.levelCounter++
     }
     this.thePointCounter.update();      //update the point counter -- can maybe move this out of RAF at some point too
