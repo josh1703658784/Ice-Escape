@@ -86,15 +86,20 @@
 <script src="Obstacles/Obstacle.js"></script>
 <script src="Obstacles/DeductObstacle.js"></script>
 <script src="Obstacles/GenericObstacle.js"></script>
+<script src="Soundtrack.js"></script>
+<script src="Soundtrack.js"></script>
+<!--<script src="Libraries/webaudio_tools.js"></script>-->
+<!--<script src="Libraries/tone.js"></script>-->
+<script src="Soundtrack.js"></script>
 
 
-
-
+<!--<span style="border: 1px solid blue;" onmouseover="startTone(200)" onmouseout="stopTone()">Roll mouse over for 200 Hz tone</span>-->
 
 <script>
 
     "use strict"
 
+	
 //request animation frame for the specific browser
 var requestAnimationFrame = window.requestAnimationFrame ||
                             window.mozRequestAnimationFrame ||
@@ -105,6 +110,16 @@ var requestAnimationFrame = window.requestAnimationFrame ||
     buzz.defaults.autoplay = false;
     buzz.defaults.loop = true;
     var soundtrack = new buzz.sound("soundtrack.m4a");
+	
+	
+	//******************************************
+	//HTML WEB AUDIO DEV WORK
+	//******************************************
+	var soundtrack = new Soundtrack()
+	soundtrack.play()
+
+	
+	
 // alert(StaticSettings.leftBound)
     //for the finite state machine for switching screens
     var START_SCREEN = 0
