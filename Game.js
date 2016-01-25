@@ -185,6 +185,7 @@ Game.prototype.fadeIn = function(){
 }
 
 Game.prototype.isGenerateBonusObject = function(){
+    return false
     var theNumber = Math.floor((Math.random() * 1000) + 1)
     if(theNumber == 500){
         console.log("MAKING BONUS OBJECT")
