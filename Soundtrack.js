@@ -19,26 +19,36 @@ function Soundtrack(){
 Soundtrack.prototype.play = function(){
 	var webAudio = new WebAudio()
 
-	webAudio.newNote("A4", 0, 5, "triangle", 1)
-	webAudio.newNote("C4", 5, 10, "triangle", 1)
-	webAudio.newNote("C5", 5, 10, "triangle", 1)
-	webAudio.newNote("F#7", 7, 15, "triangle", 1)
-	// webAudio.newSound("C4", 2, 5, "square", 1)
-	//“sine”, “square”, “saw”, “triangle”
-	// var c4 = 261.63
-	// var c5 = 523.25
-	// var cs4 = 277.18
-	// var cs5 = 554.37
-	// var d4 = 293.66
-	// var d5 = 587.33
-	// var i = 0;
-	// var counter = 100
-	// while(i < 100){
-	// 	counter = (counter + 100) % 301
-	// 	console.log(counter)
-	// 	webAudio.newOscillator(i, (i+1), counter, "triangle", 1)
-	// 	i += 1
-	// }
+	//MEASURE ONE
+	//treble
+	webAudio.newNote("E4", 0, 1, "square", 1)
+	webAudio.newNote("E4", 1, 2, "square", 1)
+	webAudio.newNote("D4", 2, 3, "square", 1)
+	webAudio.newNote("C4", 3, 4, "square", 1)
+
+	webAudio.newNote("E4", 4, 5, "square", 1)
+	webAudio.newNote("C4", 5, 6, "square", 1)
+	webAudio.newNote("C4", 6, 7, "square", 1)
+	webAudio.newNote("A4", 7, 8, "square", 1)
+
+	//bass
+	webAudio.newNote("G4", 0, 1, "square", 1)
+	webAudio.newNote("B4", 0, 1, "square", 1)
+	webAudio.newNote("E4", 0, 1, "square", 1)
+
 	
+	//MEASURE TWO
+	//treble
+	webAudio.newNote("C4", 8, 9, "square", 1)
+	webAudio.newNote("B4", 9, 10, "square", 1)
+	webAudio.newNote("B4", 10, 11, "square", 1)
+	webAudio.newNote("A4", 11, 12, "square", 1)
+
+	webAudio.newNote("A4", 12, 13, "square", 1)
+	webAudio.newNote("G4", 13, 14, "square", 1)
+	webAudio.newNote("F4", 14, 15, "square", 1)
+	webAudio.newNote("F4", 15, 16, "square", 1)
+
+	//bass
 	
 } 

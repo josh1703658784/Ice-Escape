@@ -118,6 +118,8 @@ function WebAudio(){
 				"A#8":49,
 				"B8":50
 	}
+
+	this.bpm = 160
 }
 
 WebAudio.prototype.getFrequency = function(note){
@@ -146,6 +148,30 @@ WebAudio.prototype.newFrequency = function(hertz, on, off, wave, volume){
 
 WebAudio.prototype.newNote = function(note, on, off, wave, volume){
 	var hertz = this.getFrequency(note)
-	this.newFrequency(hertz, on, off, wave, volume)
+	this.newFrequency(hertz, on/8, off/8, wave, volume)
 }
+
+// WebAudio.prototype.newNoteP = function(note, on, off, wave, volume, measure, note_type){
+// 	var hertz = this.getFrequency(note)
+// 	// this.newFrequency(hertz, on, off, wave, volume)
+// 	// off = on + 0.75
+// 	measure_length = 0.75
+// 	off = on + (note_type * measure_length)
+
+// 	var sound_node = this.context.createOscillator()
+// 	var gain_node = this.context.createGain()
+
+// 	sound_node.type = wave
+// 	sound_node.frequency.value = hertz
+// 	sound_node.connect(gain_node)
+
+// 	gain_node.gain.value = volume
+// 	gain_node.connect(this.context.destination)
+
+// 	sound_node.start(on)
+// 	sound_node.stop(off)
+// }
+
+
+// WebAudio.prototype.
 
