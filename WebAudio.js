@@ -123,7 +123,7 @@ function WebAudio(){
 
 	this.wave;
 	this.volume;
-	this.notesInMeasure;
+
 
 	this.measure = 0
 
@@ -140,6 +140,14 @@ function WebAudio(){
 // 	return finite_frequency
 // }
 
+WebAudio.prototype.decrementOctave = function(){
+	this.octave -= 1
+}
+
+WebAudio.prototype.incrementOctave = function(){
+	this.octave += 1
+}
+
 WebAudio.prototype.incrementMeasure = function(){
 	this.measure += 1
 }
@@ -148,9 +156,6 @@ WebAudio.prototype.incrementPosition = function(){
 	this.position += 1
 }
 
-WebAudio.prototype.setNotesInMeasure = function(notesInMeasure){
-	this.notesInMeasure = notesInMeasure
-}
 
 WebAudio.prototype.newFrequency = function(hertz, on, off){
 	var sound_node = this.context.createOscillator()
