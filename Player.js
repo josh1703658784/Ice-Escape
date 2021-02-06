@@ -26,15 +26,15 @@ function Player(){
     this.speed = StaticSettings.playerSpeed
     this.size = 10;                                         //user size -- maybe scale this 
     this.userObjectXCoordinate = StaticSettings.playerStartX   
-	this.userObjectYCoordinate = StaticSettings.playerStartY     
+	  this.userObjectYCoordinate = StaticSettings.playerStartY     
     this.leftBound = StaticSettings.leftBound;                                     //initially set bounds to window bounds
     this.rightBound = StaticSettings.rightBound                    //initially set bounds to window bounds
 //    this.PLAYER_COLOR = '#f5f5f5'             //grey
     this.PLAYER_COLOR = '#48325b'
     this.prerenderCanvas = document.createElement('canvas')
     this.canvasElement = document.createElement('canvas')
-    this.topBound = StaticSettings.topBound
-    this.bottomBound = StaticSettings.bottomBound
+    this.topBound = StaticSettings.playerTopBound
+    this.bottomBound = StaticSettings.playerBottomBound
     this.keysDown = {};
     this.opacity = 0
 
@@ -200,6 +200,8 @@ Player.prototype.drawPlayer = function(){
     
     var mainContext = this.getContext()
     mainContext.drawImage(this.prerenderCanvas, this.userObjectXCoordinate, this.userObjectYCoordinate)
+    console.log( `Drawing user at: ${this.userObjectXCoordinate}, ${this.userObjectYCoordinate}` )
+      console.log("BOTTOM BOUND", this.bottomBound)
 
 };
 
@@ -244,8 +246,9 @@ Player.prototype.boundsAdjustment = function(){
         this.recalculateXPositionFromLeftSide(this.leftBound + 1);
         return true
     }
-    else if(this.userObjectYCoordinate <= this.topBound){                //if player on top bound keep from moving further
-        this.userObjectYCoordinate = this.topBound + 1
+  //else if(this.userObjectYCoordinate <= this.topBound){                //if player on top bound keep from moving further
+    else if(this.getTopPositionY() <= this.topBound){                //if player on top bound keep from moving further
+      this.recalculateYPositionFromTopSide(this.topBound + 1)
         return true
     }
     else if(this.getBottomPositionY() >= this.bottomBound){             //if player on bottom bound keep from moving further
@@ -279,6 +282,10 @@ Player.prototype.getTopPositionY = function(){
 //player bounding box is top left -- this calculates position for player from bottom coordinates
 Player.prototype.recalculateYPositionFromBottomSide = function(bottomY){
     this.userObjectYCoordinate = bottomY - this.prerenderCanvas.height
+}
+
+Player.prototype.recalculateYPositionFromTopSide = function(topY){
+    this.userObjectYCoordinate = topY
 }
 
 
