@@ -127,7 +127,8 @@ Obstacle.prototype.update = function () {
         this.yPosition = this.yPosition + this.speed;
     }
     else{
-        this.isOffScreen = true
+      //this.isOffScreen = true
+        delete this
     }
    
 };
